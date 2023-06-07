@@ -1,0 +1,32 @@
+.contestSort {
+	display: flex;
+	flex-direction: row;
+	align-self: left;
+	gap: 10px;
+	margin-bottom: 40px;
+}
+
+.chip {
+	user-select: none;
+	cursor: pointer;
+	border-radius: 15px;
+	padding: 4px 12px;
+	color: orange;
+	background-color: rgba(255, 166, 0, 0.318);
+	transition: all 0.3s ease 0s;
+	border: none;
+}
+
+.chip:hover {
+	border-radius: 15px;
+	padding: 4px 12px;
+	color: rgb(222, 222, 222);
+	background-color: orange;
+}
+.chip:active {
+	border-radius: 15px;
+	padding: 4px 12px;
+	color: rgb(222, 222, 222);
+	background-color: rgb(194, 128, 5);
+	transition: none;
+}
