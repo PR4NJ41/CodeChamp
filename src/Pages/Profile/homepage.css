@@ -1,0 +1,216 @@
+body {
+	margin: 50px;
+	/* background-color: #18181b; */
+	background-color: #232233;
+	/* font-family: "Inter", Arial; */
+	font-family: "Arial Rounded MT", sans-serif;
+	-webkit-tap-highlight-color: transparent;
+}
+a {
+	text-decoration: none;
+}
+
+.main {
+	padding-top: 110px;
+	width: 100%;
+	/* max-width: 800px; */
+	background-color: #232233;
+	color: white;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* max-width: 1100px; */
+}
+
+.searchbox {
+	margin-bottom: 50px;
+	background-color: #18181b;
+	/* border: 1px solid red; */
+	border-radius: 6px;
+	padding: 15px;
+	color: white;
+	appearance: none;
+}
+.searchbox:enabled {
+	margin-bottom: 50px;
+	background-color: #303037ad;
+	border: 1px #171717 solid;
+	border-radius: 6px;
+	padding: 15px;
+}
+
+.grid {
+	/* padding: 1px; */
+	width: 70vw;
+	display: grid;
+	grid-template-columns: repeat(1, 100%);
+	/* grid-gap: 32px; */
+	grid-gap: 10px;
+	position: relative;
+	z-index: 1;
+	/* background-color: #181823; */
+}
+
+.card {
+	background-color: #2a2939;
+	/* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05), 0px 8px 15px rgba(0, 0, 0, 0.1),
+		0 0 0 1px rgba(255, 255, 255, 0.1); */
+	padding: 20px 35px 20px 35px;
+	border-radius: 10px;
+	cursor: pointer;
+	position: relative;
+	transition: box-shadow 0.25s;
+	user-select: none;
+}
+.cardHead {
+	/* background-color: #2a2939; */
+	/* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.05), 0px 8px 15px rgba(0, 0, 0, 0.1),
+		0 0 0 1px rgba(255, 255, 255, 0.1); */
+	padding: 20px 20px 20px 20px;
+	border-radius: 10px;
+	cursor: pointer;
+	position: relative;
+	/* transition: box-shadow 0.25s; */
+	user-select: none;
+}
+.card:active {
+	transform: scale(0.9);
+}
+/* .card:before {
+
+	position: absolute;
+	inset: 0;
+	border-radius: 15px;
+	background-color: rgba(255, 255, 255, 0.015);
+} */
+.card:hover {
+	/* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.04),
+		0px 15px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 208, 255, 0.9); */
+}
+
+p {
+	z-index: 2;
+	position: relative;
+	/* margin: 0 0 12px 0; */
+	font-size: 14px;
+	line-height: 1.7;
+	color: #a1a1aa;
+}
+
+h4 {
+	z-index: 2;
+	position: relative;
+	margin: 0px;
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.tableRow {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	/* background-color: #a1a1aa; */
+}
+.t1 {
+	width: 15%;
+	/* color: rgb(105, 155, 235); */
+	color: tomato;
+	/* background-color: rgb(71, 40, 40); */
+}
+.t2 {
+	width: 55%;
+	text-align: center;
+	/* background-color: rgb(41, 79, 48); */
+}
+.t3 {
+	width: 15%;
+	/* text-align: right; */
+	text-align: center;
+	/* color: rgb(235, 105, 105); */
+	color: #6b66da;
+	/* background-color: rgb(26, 43, 61); */
+}
+.t4 {
+	/* text-align: end; */
+	text-align: end;
+	width: 15%;
+	/* background-color: rgb(52, 23, 40); */
+}
+
+.data {
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	width: 100%;
+	margin-left: 600px;
+	margin-top: 20px;
+}
+
+.navigation {
+	padding-top: 70px;
+	user-select: none;
+}
+.navBtn {
+	/* border-radius: 12px; */
+	border: 1px solid rgb(86, 86, 86);
+	color: rgb(86, 86, 86);
+	padding: 7px 15px;
+	cursor: pointer;
+}
+.navBtn:hover {
+	color: white;
+	border: 1px white solid;
+	transition: all 0.3s ease 0s;
+}
+.navBtn:active {
+	background-color: rgb(45, 45, 45);
+	transform: scale(0.9);
+	/* transition: all 0.2s ease-out; */
+}
+.navPgNo {
+	padding: 0px 30px;
+	/* border: 1px solid rgb(86, 86, 86); */
+}
+
+@media screen and (width <500px) {
+	body {
+		margin: 15px;
+	}
+	.grid {
+		grid-gap: 20px;
+	}
+	.card {
+		padding: 5px 12px 5px 12px;
+	}
+	.tableRow {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		/* background-color: #a1a1aa; */
+	}
+	.t1 {
+		width: 20%;
+		color: rgb(105, 155, 235);
+	}
+	.t2 {
+		width: 50%;
+		/* display: none; */
+	}
+	.t3 {
+		width: 15%;
+		text-align: right;
+		color: rgb(235, 105, 105);
+	}
+	.t4 {
+		width: 20%;
+		text-align: right;
+		/* background-color: aqua; */
+	}
+	.h4 {
+		font-size: 8px;
+		/* margin: 6px 0 2px 0; */
+	}
+}
