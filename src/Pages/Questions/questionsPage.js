@@ -3,11 +3,12 @@ import { useEffect } from "react";
 import "../Profile/homepage.css";
 import Navbar from "../../Components/Navbar/navbar";
 import { useGlobalContext } from "../../Components/Context/context";
+import "./questionsPage.css";
 
 const QuestionsPage = () => {
 	let API = "https://codeforces.com/api/problemset.problems";
 	const [posts, setPosts] = useState([]);
-	const { questions } = useGlobalContext();
+	const { questions, acceptedProblems } = useGlobalContext();
 
 	// const fetchApiData = () => {
 	// 	fetch(API)
@@ -80,31 +81,48 @@ const QuestionsPage = () => {
 						</tr>
 					</h4>
 				</div>
-				{records.map((post, index) => (
-					<>
-						{post.rating && (
-							<a
-								href={`https://codeforces.com/problemset/problem/${post.contestId}/${post.index}`}
-							>
-								<div className="card" key={index}>
-									<h4>
-										<tr className="tableRow">
-											<td className="t1">
-												{post.contestId}
-												{post.index}
-											</td>
-											<td className="t2">{post.name}</td>
-											<td className="t3">
-												{post.rating}
-											</td>
-											<td className="t4">17293</td>
-										</tr>
-									</h4>
-								</div>
-							</a>
-						)}
-					</>
-				))}
+				{records.map((post, index) => {
+					const isAccepted = acceptedProblems.some(
+						(accepted) =>
+							accepted.contestId === post.contestId &&
+							accepted.index === post.index
+					);
+					return (
+						<>
+							{post.rating && (
+								<a
+									href={`https://codeforces.com/problemset/problem/${post.contestId}/${post.index}`}
+								>
+									<div className="card" key={index}>
+										<h4>
+											<tr className="tableRow">
+												<td className="t1">
+													{post.contestId}
+													{post.index}
+												</td>
+												<td className="t2">
+													{post.name}
+												</td>
+												<td className="t3">
+													{post.rating}
+												</td>
+												<td className="t4">
+													<div
+														className={
+															isAccepted
+																? "greenCircle"
+																: ""
+														}
+													></div>
+												</td>
+											</tr>
+										</h4>
+									</div>
+								</a>
+							)}
+						</>
+					);
+				})}
 			</div>
 			<div className="navigation">
 				<tr className="navBox">

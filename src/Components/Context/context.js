@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 
 const contestApi = "https://codeforces.com/api/contest.list";
 const questionApi = "https://codeforces.com/api/problemset.problems";
+const submissionApi =
+	"https://codeforces.com/api/user.status?handle=unseenSpirit";
 
 const AppContext = React.createContext(0);
 const AppProvider = ({ children }) => {
@@ -9,6 +11,9 @@ const AppProvider = ({ children }) => {
 	const [questions, setQuestions] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [qLoading, setQLoading] = useState(true);
+
+	const [submissions, setSubmissions] = useState([]);
+	const [acceptedProblems, setAcceptedProblems] = useState([]);
 
 	const getContests = async (url) => {
 		try {
@@ -24,8 +29,8 @@ const AppProvider = ({ children }) => {
 	};
 	const getQuestions = async (url) => {
 		try {
-			const res = await fetch(url);
-			const data = await res.json();
+			const response = await fetch(url);
+			const data = await response.json();
 			setQuestions(data.result.problems);
 			setQLoading(false);
 		} catch (error) {
@@ -33,12 +38,37 @@ const AppProvider = ({ children }) => {
 		}
 	};
 
+	const fetchSubmissions = async (url) => {
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			setSubmissions(data.result);
+		} catch (error) {
+			console.error(console.log(error));
+		}
+	};
+
 	useEffect(() => {
 		getContests(contestApi);
 		getQuestions(questionApi);
+		fetchSubmissions(submissionApi);
 	}, []);
+
+	useEffect(() => {
+		const acceptedProblems = submissions
+			.filter((submission) => submission.verdict === "OK")
+			.map((submission) => ({
+				contestId: submission.problem.contestId,
+				index: submission.problem.index,
+			}));
+
+		setAcceptedProblems(acceptedProblems);
+	}, [submissions]);
+
 	return (
-		<AppContext.Provider value={{ isLoading, contests, questions }}>
+		<AppContext.Provider
+			value={{ isLoading, contests, questions, acceptedProblems }}
+		>
 			{children}
 		</AppContext.Provider>
 	);
