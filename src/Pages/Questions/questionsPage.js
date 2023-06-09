@@ -6,34 +6,40 @@ import { useGlobalContext } from "../../Components/Context/context";
 import "./questionsPage.css";
 
 const QuestionsPage = () => {
-	let API = "https://codeforces.com/api/problemset.problems";
-	const [posts, setPosts] = useState([]);
-	const { questions, acceptedProblems } = useGlobalContext();
+	const { questions, acceptedProblems, newQuestions, setNewQuestions } =
+		useGlobalContext();
 
-	// const fetchApiData = () => {
-	// 	fetch(API)
-	// 		.then((response) => response.json())
-	// 		.then((data) => setPosts(data.result.problems));
-	// };
-
-	const [currentpage, setCurrentpage] = useState(1);
+	const [currentpage, setCurrentpage, k] = useState(1);
 	const recordPerPage = 50;
 	const lastIndex = recordPerPage * currentpage;
 	const firstIndex = lastIndex - recordPerPage;
 
-	const records = questions.slice(firstIndex, lastIndex);
-	const nPages = Math.ceil(questions.length / recordPerPage);
-	const numbers = [...Array(nPages + 1).keys()].slice(1);
+	const records = newQuestions.slice(firstIndex, lastIndex);
+	const nPages = Math.ceil(newQuestions.length / recordPerPage);
 
-	// useEffect(() => {
-	// 	fetchApiData();
-	// }, []);
+	const search = (event) => {
+		const p = questions.filter(
+			(e) =>
+				e.name
+					.toLowerCase()
+					.includes(event.target.value.toLowerCase()) ||
+				(e.rating.toString().includes(event.target.value.toString()) &&
+					e.rating.toString().length ==
+						event.target.value.toString().length)
+		);
+		setNewQuestions(p);
+	};
 
 	return (
 		<div className="main">
 			<Navbar />
 
-			<input className="searchbox" placeholder="Search Question"></input>
+			<input
+				className="searchbox"
+				placeholder="Search Question"
+				id="questionSearch"
+				onChange={search}
+			></input>
 			<div className="grid">
 				<div className="cardHead">
 					<h4>
@@ -76,7 +82,7 @@ const QuestionsPage = () => {
 									fontWeight: "bolder",
 								}}
 							>
-								Solved
+								Solved ({acceptedProblems.length})
 							</td>
 						</tr>
 					</h4>
@@ -88,8 +94,8 @@ const QuestionsPage = () => {
 							accepted.index === post.index
 					);
 					return (
-						<>
-							{post.rating && (
+						<div>
+							{true && (
 								<a
 									href={`https://codeforces.com/problemset/problem/${post.contestId}/${post.index}`}
 								>
@@ -107,20 +113,20 @@ const QuestionsPage = () => {
 													{post.rating}
 												</td>
 												<td className="t4">
-													<div
-														className={
-															isAccepted
-																? "greenCircle"
-																: ""
-														}
-													></div>
+													{isAccepted ? (
+														<div className="accepted">
+															Accepted
+														</div>
+													) : (
+														""
+													)}
 												</td>
 											</tr>
 										</h4>
 									</div>
 								</a>
 							)}
-						</>
+						</div>
 					);
 				})}
 			</div>

@@ -1,5 +1,5 @@
 body {
-	margin: 50px;
+	/* margin: 50px; */
 	/* background-color: #18181b; */
 	background-color: #232233;
 	/* font-family: "Inter", Arial; */
@@ -116,6 +116,9 @@ h4 {
 }
 .t1 {
 	width: 15%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	/* color: rgb(105, 155, 235); */
 	color: tomato;
 	/* background-color: rgb(71, 40, 40); */
@@ -123,6 +126,9 @@ h4 {
 .t2 {
 	width: 55%;
 	text-align: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	/* background-color: rgb(41, 79, 48); */
 }
 .t3 {
@@ -131,6 +137,9 @@ h4 {
 	text-align: center;
 	/* color: rgb(235, 105, 105); */
 	color: #6b66da;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 	/* background-color: rgb(26, 43, 61); */
 }
 .t4 {
