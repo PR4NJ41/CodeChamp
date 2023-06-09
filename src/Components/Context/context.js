@@ -12,12 +12,14 @@ const AppProvider = ({ children }) => {
 	const [userName, setUserName] = useState("");
 	const [newQuestions, setNewQuestions] = useState(questions);
 	const [profile, setProfile] = useState([]);
+	const [filterContest, setFilterContest] = useState(contests);
 
 	const getContests = async (url) => {
 		try {
 			const res = await fetch(url);
 			const data = await res.json();
 			setContests(data.result);
+			setFilterContest(data.result);
 		} catch (error) {
 			console.log(error);
 		}
@@ -118,6 +120,8 @@ const AppProvider = ({ children }) => {
 				i,
 				setI,
 				profile,
+				filterContest,
+				setFilterContest,
 			}}
 		>
 			{children}

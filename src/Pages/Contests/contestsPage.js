@@ -7,9 +7,9 @@ import { useGlobalContext } from "../../Components/Context/context";
 
 const ContestsPage = () => {
 	// let API = "https://codeforces.com/api/problemset.problems";
-	const { contests } = useGlobalContext();
+	const { contests, filterContest, setFilterContest } = useGlobalContext();
 	// let API2 = "https://codeforces.com/api/contest.list";
-	const [posts, setPosts] = useState([]);
+	// const [posts, setPosts] = useState([]);
 
 	// const fetchApiData = () => {
 	// 	fetch(API2)
@@ -22,24 +22,30 @@ const ContestsPage = () => {
 	const lastIndex = recordPerPage * currentpage;
 	const firstIndex = lastIndex - recordPerPage;
 
-	const records = contests.slice(3, 60);
-	const nPages = Math.ceil(contests.length / recordPerPage);
-	const numbers = [...Array(nPages + 1).keys()].slice(1);
+	const records = filterContest.slice(firstIndex, lastIndex);
+	const nPages = Math.ceil(filterContest.length / recordPerPage);
 
 	// useEffect(() => {
 	// 	fetchApiData();
 	// }, []);
+
+	const sortContest = (e) => {
+		const temp = contests.filter((q) => q.name.toLowerCase().includes(e));
+		setFilterContest(temp);
+	};
 
 	return (
 		<div className="main">
 			<Navbar />
 
 			<div className="contestSort">
-				<button className="chip">Div 1</button>
-				<div className="chip">Div 2</div>
-				<div className="chip">Div 3</div>
-				<div className="chip">Div 4</div>
-				<div className="chip">Edu Rounds</div>
+				<div className="chip" onClick={() => sortContest("")}>All</div>
+				<div className="chip" onClick={() => sortContest("(div. 1)")}>Div 1</div>
+				<div className="chip" onClick={() => sortContest("(div. 2)")}>Div 2</div>
+				<div className="chip" onClick={() => sortContest("(div. 3)")}>Div 3</div>
+				<div className="chip" onClick={() => sortContest("(div. 4)")}>Div 4</div>
+				<div className="chip" onClick={() => sortContest("educational")}>Edu Rounds</div>
+				<div className="chip" onClick={() => sortContest("(div. 1 +")}>Other</div>
 			</div>
 			<div className="grid">
 				{records.map((post, index) => (
