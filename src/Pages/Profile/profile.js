@@ -7,52 +7,43 @@ const Profile = () => {
 	const { userName, setUserName, acceptedProblems, profile } =
 		useGlobalContext();
 
+	useEffect(() => {
+		setUserName(localStorage.getItem("user"));
+	}, []);
+
 	return (
 		<div className="main">
 			<Navbar />
 			<div className="profile">
-				<input
-					placeholder={acceptedProblems.length}
-					id="userNameInput"
-				></input>
-				<button
-					onClick={() => {
-						localStorage.setItem(
-							"user",
-							document.getElementById("userNameInput").value
-						);
-						setUserName(
-							document.getElementById("userNameInput").value
-						);
-						window.location.reload();
-					}}
-				>
-					Save
-				</button>
 				<div className="userData">
 					<div className="left">
 						<img src={profile.titlePhoto} className="userImg"></img>
 					</div>
 					<div className="right">
 						<table>
-							<tr>
-								<td>Name</td>
-								<td>
-									{profile.firstName} {profile.lastName}
-								</td>
-							</tr>
+							{profile.firstName && (
+								<tr>
+									<td>Name</td>
+									<td>
+										{profile.firstName} {profile.lastName}
+									</td>
+								</tr>
+							)}
 
-							<tr>
-								<td>Country</td>
-								<td>{profile.country}</td>
-							</tr>
+							{profile.country && (
+								<tr>
+									<td>Country</td>
+									<td>{profile.country}</td>
+								</tr>
+							)}
+
 							<tr>
 								<td>Rating</td>
 								<td>{profile.rating}</td>
 							</tr>
 							<tr>
 								<td>Handle</td>
-								<td>{profile.handle}</td>
+								<td>@{profile.handle}</td>
 							</tr>
 							<tr>
 								<td>Rank</td>
@@ -69,6 +60,14 @@ const Profile = () => {
 						</table>
 					</div>
 				</div>
+				<button
+					onClick={() => {
+						localStorage.clear();
+						window.location.reload();
+					}}
+				>
+					Log Out
+				</button>
 			</div>
 		</div>
 	);
