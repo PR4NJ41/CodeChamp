@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
 	const [newQuestions, setNewQuestions] = useState(questions);
 	const [profile, setProfile] = useState([]);
 	const [filterContest, setFilterContest] = useState(contests);
-	const [loading, setOnLoading] = useState(true);
+	const [onloading, setOnLoading] = useState(true);
 
 	const getContests = async (url) => {
 		try {
@@ -86,6 +86,7 @@ const AppProvider = ({ children }) => {
 	}
 
 	useEffect(() => {
+		setOnLoading(true);
 		const m = localStorage.getItem("user");
 		console.log(localStorage.getItem("user"), "name");
 		fetchProfile(m);
@@ -93,6 +94,8 @@ const AppProvider = ({ children }) => {
 		setUserName(localStorage.getItem("user"));
 		getContests(contestApi);
 		getQuestions(questionApi);
+		setOnLoading(false);
+
 		// main();
 
 		// const timer = setTimeout(() => {}, 4000);
@@ -135,6 +138,8 @@ const AppProvider = ({ children }) => {
 				profile,
 				filterContest,
 				setFilterContest,
+				onloading,
+				setOnLoading,
 			}}
 		>
 			{children}
