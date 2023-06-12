@@ -19,26 +19,17 @@ function getRated(rating) {
 }
 
 const MagicPage = () => {
-	const { questions, acceptedProblems, i, setI, userName, profile } =
-		useGlobalContext();
+	const { questions, acceptedProblems, i, setI, userName, profile } = useGlobalContext();
 	const [magicItems, setMagicItems] = useState([]);
 	const todayDate = new Date();
 	const rating = Math.trunc(profile.rating / 100) * 100;
 	console.log(rating, "sjdhkvb");
-	const date =
-		todayDate.getFullYear() +
-		"/" +
-		todayDate.getMonth() +
-		"/" +
-		todayDate.getDay();
+	const date = todayDate.getFullYear() + "/" + todayDate.getMonth() + "/" + todayDate.getDay();
 
 	let final = [];
 
 	function isObjectPresent(obj, array) {
-		return array.some(
-			(item) =>
-				item.contestId === obj.contestId && item.index === obj.index
-		);
+		return array.some((item) => item.contestId === obj.contestId && item.index === obj.index);
 	}
 
 	const doMagic = () => {
@@ -71,10 +62,7 @@ const MagicPage = () => {
 			}
 		}
 		if (i == 1) {
-			if (
-				date != localStorage.getItem("MagicDate") ||
-				userName != localStorage.getItem("magicUser")
-			) {
+			if (date != localStorage.getItem("MagicDate") || userName != localStorage.getItem("magicUser")) {
 				localStorage.setItem("magicUser", userName);
 				alert("Questions updated", userName);
 				console.log(userName, "Chhh");
@@ -95,51 +83,78 @@ const MagicPage = () => {
 		}
 		console.log(getRated(rating));
 		setMagicItems(JSON.parse(localStorage.getItem("fine")));
-	}, [questions.length]);
+	}, [questions]);
 	return (
 		<div className="main">
 			<Navbar />
 			<div>
 				{"MagicDate" in localStorage && (
 					<div className="grid">
-						{magicItems.map((pos) => {
-							const isAccepted = acceptedProblems.some(
-								(accepted) =>
-									accepted.contestId === pos.contestId &&
-									accepted.index === pos.index
-							);
-							return (
-								<a
-									href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}
+						<table>
+							<th className="tableRow">
+								<td
+									className="t1"
+									style={{
+										color: "#c9d9ff",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
 								>
-									<div className="card">
-										<h4>
-											<tr className="tableRow">
-												<td className="t1">
-													{pos.contestId}
-													{pos.index}
-												</td>
-												<td className="t2">
-													{pos.name}
-												</td>
-												<td className="t3">
-													{pos.rating}
-												</td>
-												<td className="t4">
-													{isAccepted ? (
-														<div className="accepted">
-															Accepted
-														</div>
-													) : (
-														""
-													)}
-												</td>
-											</tr>
-										</h4>
-									</div>
-								</a>
-							);
-						})}
+									Contest
+								</td>
+								<td
+									className="t2"
+									style={{
+										color: "#c9d9ff",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
+								>
+									Problem
+								</td>
+								<td
+									className="t3"
+									style={{
+										color: "#c9d9ff",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
+								>
+									Rating
+								</td>
+
+								<td
+									className="t4"
+									style={{
+										color: "#c9d9ff",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
+								>
+									Solved ({acceptedProblems.length})
+								</td>
+							</th>
+							{magicItems.map((pos) => {
+								const isAccepted = acceptedProblems.some((accepted) => accepted.contestId === pos.contestId && accepted.index === pos.index);
+								return (
+									<tr className="tableRow">
+										<td className="t1">
+											<a style={{ color: "tomato" }} href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
+												{pos.contestId}
+												{pos.index}
+											</a>
+										</td>
+										<td className="t2">
+											<a style={{ color: "#c9d9ff" }} href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
+												{pos.name}
+											</a>
+										</td>
+										<td className="t3">{pos.rating}</td>
+										<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
+									</tr>
+								);
+							})}
+						</table>
 					</div>
 				)}
 			</div>

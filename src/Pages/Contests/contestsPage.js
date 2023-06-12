@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../Components/Context/context";
 
 const ContestsPage = () => {
 	// let API = "https://codeforces.com/api/problemset.problems";
-	const { contests, filterContest, setFilterContest } = useGlobalContext();
+	const { contests, filterContest, setFilterContest, questions, acceptedQuestions } = useGlobalContext();
 	// let API2 = "https://codeforces.com/api/contest.list";
 	// const [posts, setPosts] = useState([]);
 
@@ -39,37 +39,59 @@ const ContestsPage = () => {
 			<Navbar />
 
 			<div className="contestSort">
-				<div className="chip" onClick={() => sortContest("")}>All</div>
-				<div className="chip" onClick={() => sortContest("(div. 1)")}>Div 1</div>
-				<div className="chip" onClick={() => sortContest("(div. 2)")}>Div 2</div>
-				<div className="chip" onClick={() => sortContest("(div. 3)")}>Div 3</div>
-				<div className="chip" onClick={() => sortContest("(div. 4)")}>Div 4</div>
-				<div className="chip" onClick={() => sortContest("educational")}>Edu Rounds</div>
-				<div className="chip" onClick={() => sortContest("(div. 1 +")}>Other</div>
+				<div className="chip" onClick={() => sortContest("")}>
+					All
+				</div>
+				<div className="chip" onClick={() => sortContest("(div. 1)")}>
+					Div 1
+				</div>
+				<div className="chip" onClick={() => sortContest("(div. 2)")}>
+					Div 2
+				</div>
+				<div className="chip" onClick={() => sortContest("(div. 3)")}>
+					Div 3
+				</div>
+				<div className="chip" onClick={() => sortContest("(div. 4)")}>
+					Div 4
+				</div>
+				<div className="chip" onClick={() => sortContest("educational")}>
+					Edu Rounds
+				</div>
+				<div className="chip" onClick={() => sortContest("(div. 1 +")}>
+					Other
+				</div>
 			</div>
 			<div className="grid">
-				{records.map((post, index) => (
-					<>
-						{post.phase === "FINISHED" && (
-							<a
-								href={`https://codeforces.com/contest/${post.id}`}
-							>
-								<div className="card" key={index}>
-									<h4>
-										<tr className="tableRow">
-											<td
-												className="t2"
-												style={{ textAlign: "left" }}
-											>
-												{post.name}
-											</td>
-										</tr>
-									</h4>
-								</div>
-							</a>
-						)}
-					</>
-				))}
+				<table>
+					<th className="tableRow">
+						<td
+							className="t1"
+							style={{
+								color: "#c9d9ff",
+								fontSize: "24px",
+								fontWeight: "bolder",
+							}}
+						>
+							Contests
+						</td>
+					</th>
+					{records.map((post, index) => {
+						if (post.phase == "FINISHED") {
+							return (
+								<tr className="tableRow">
+									<td className="t2" style={{ textAlign: "center" }}>
+										<a style={{ color: "#c9d9ff" }} href={`https://codeforces.com/contest/${post.id}`}>
+											{post.name}
+										</a>
+									</td>
+									<td className="t2" style={{ textAlign: "center" }}>
+										<a style={{ color: "#c9d9ff" }}></a>
+									</td>
+								</tr>
+							);
+						}
+					})}
+				</table>
 			</div>
 			<div className="navigation">
 				<tr className="navBox">

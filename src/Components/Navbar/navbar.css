@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap");
 
 .mainNav {
-	background-color: #2a2939;
+	/* background-color: #2a2939; */
+	background-color: #1a213c;
 	width: 100%;
 	position: absolute;
 	top: 0px;
@@ -20,6 +21,7 @@
 	justify-content: center;
 	/* border-bottom: 1px white solid; */
 	/* box-shadow: 2px 1px 20px rgba(0, 0, 0, 0.7); */
+	border-bottom: 1px solid rgb(41, 50, 93);
 }
 .navLogo {
 	padding-left: 80px;

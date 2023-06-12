@@ -4,8 +4,7 @@ import "./profile.css";
 import { useGlobalContext } from "../../Components/Context/context";
 
 const Profile = () => {
-	const { userName, setUserName, acceptedProblems, profile } =
-		useGlobalContext();
+	const { userName, setUserName, acceptedProblems, profile } = useGlobalContext();
 
 	useEffect(() => {
 		setUserName(localStorage.getItem("user"));

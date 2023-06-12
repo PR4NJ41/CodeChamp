@@ -58,9 +58,7 @@ const AppProvider = ({ children }) => {
 	};
 	const fetchProfile = async (name) => {
 		try {
-			const response = await fetch(
-				`https://codeforces.com/api/user.info?handles=${name}`
-			);
+			const response = await fetch(`https://codeforces.com/api/user.info?handles=${name}`);
 			const data = await response.json();
 			setProfile(data.result[0]);
 			console.log(data.result[0]);
@@ -68,6 +66,23 @@ const AppProvider = ({ children }) => {
 			console.log(error);
 		}
 	};
+
+	async function main() {
+		const m = localStorage.getItem("user");
+		const apis = [fetch(contestApi), fetch(questionApi), fetch(`https://codeforces.com/api/user.info?handles=${m}`)];
+
+		try {
+			// const res = await Promise.allSettled(apis);\
+			// const data = await Promise.all(
+			// 	res.map((item) => {
+			// 		return item.json();
+			// 	})
+			// );
+			// console.log("mera data", data);
+		} catch (e) {
+			console.log("errrorryttr");
+		}
+	}
 
 	useEffect(() => {
 		const m = localStorage.getItem("user");
@@ -77,19 +92,16 @@ const AppProvider = ({ children }) => {
 		setUserName(localStorage.getItem("user"));
 		getContests(contestApi);
 		getQuestions(questionApi);
+		// main();
 
-		const timer = setTimeout(() => {}, 4000);
+		// const timer = setTimeout(() => {}, 4000);
 
-		return () => clearTimeout(timer);
+		// return () => clearTimeout(timer);
 	}, []);
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) {
-			fetchSubmissions(
-				`https://codeforces.com/api/user.status?handle=${localStorage.getItem(
-					"user"
-				)}`
-			);
+			fetchSubmissions(`https://codeforces.com/api/user.status?handle=${localStorage.getItem("user")}`);
 		}
 	}, [userName]);
 
