@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
 	const [newQuestions, setNewQuestions] = useState(questions);
 	const [profile, setProfile] = useState([]);
 	const [filterContest, setFilterContest] = useState(contests);
+	const [loading, setOnLoading] = useState(true);
 
 	const getContests = async (url) => {
 		try {
