@@ -13,7 +13,7 @@ const AppProvider = ({ children }) => {
 	const [newQuestions, setNewQuestions] = useState(questions);
 	const [profile, setProfile] = useState([]);
 	const [filterContest, setFilterContest] = useState(contests);
-	const [onloading, setOnLoading] = useState(true);
+	const [onLoading, setOnLoading] = useState(true);
 
 	const getContests = async (url) => {
 		try {
@@ -94,7 +94,9 @@ const AppProvider = ({ children }) => {
 		setUserName(localStorage.getItem("user"));
 		getContests(contestApi);
 		getQuestions(questionApi);
-		setOnLoading(false);
+		setTimeout(() => {
+			setOnLoading(false);
+		}, 1000);
 
 		// main();
 
@@ -138,7 +140,7 @@ const AppProvider = ({ children }) => {
 				profile,
 				filterContest,
 				setFilterContest,
-				onloading,
+				onLoading,
 				setOnLoading,
 			}}
 		>
