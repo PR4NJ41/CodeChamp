@@ -83,3 +83,42 @@
 	padding: 40px 90px;
 	border-radius: 12px;
 }
+
+.loader {
+	width: 100vw;
+	height: 100vh;
+	/* background-color: #f7f9fb; */
+	background-color: #13182c;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	flex-direction: column;
+	top: 0px;
+	transition: opacity 0.75s, visibility 0.75s;
+}
+
+.loader-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.loader::after {
+	content: "";
+	width: 75px;
+	height: 75px;
+	border: 15px solid #dddddd;
+	border-top-color: #7449f5;
+	border-radius: 50%;
+	animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}

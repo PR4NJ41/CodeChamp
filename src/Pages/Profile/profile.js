@@ -2,16 +2,29 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../Components/Navbar/navbar";
 import "./profile.css";
 import { useGlobalContext } from "../../Components/Context/context";
+// import RatedProblemFetcher from "../../Components/ratedProblemFetcher";
 
 const Profile = () => {
-	const { userName, setUserName, acceptedProblems, profile } = useGlobalContext();
+	// var { userName, setUserName, acceptedProblems, profile, onLoading, setOnLoading } = useGlobalContext();
+	var { setUserName, profile, onLoading, setOnLoading, questions, acceptedProblems, i, setI, userName } = useGlobalContext();
+
+	// window.addEventListener("load", () => {
+	// 		const loader = document.querySelector(".loader");
+	// 		loader.classList.add("loader-hidden");
+
+	// 	loader.addEventListener("transitioned", () => {
+	// 		document.body.removechild("loader");
+	// 	});
+	// });
 
 	useEffect(() => {
+		// RatedProblemFetcher("Pranjal", setUserName, profile, onLoading, setOnLoading, questions, acceptedProblems, i, setI, userName);
 		setUserName(localStorage.getItem("user"));
 	}, []);
 
 	return (
 		<div className="main">
+			{onLoading && <div className="loader" />}
 			<Navbar />
 			<div className="profile">
 				<div className="userData">
