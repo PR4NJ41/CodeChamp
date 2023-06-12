@@ -14,7 +14,7 @@ function getRated(rating) {
 	if (rating <= 1000) {
 		return finalRating;
 	} else {
-		return { r1: rating, r2: rating + 100, r3: rating + 200 };
+		return { r1: rating < 3300 ? rating : 3300, r2: rating + 100 < 3400 ? rating + 100 : 3400, r3: rating + 200 < 3500 ? rating + 200 : 3500 };
 	}
 }
 
@@ -28,11 +28,14 @@ const MagicPage = () => {
 
 	let final = [];
 
+	//
+	console.log("i:", i, "questions.length", questions.length);
 	function isObjectPresent(obj, array) {
 		return array.some((item) => item.contestId === obj.contestId && item.index === obj.index);
 	}
 
 	const doMagic = () => {
+		console.log("doi:", i, "doquestions.length", questions.length);
 		const a1 = questions.filter((q) => q.rating == getRated(rating).r1);
 		for (let l = 0; l < a1.length; l++) {
 			if (!isObjectPresent(a1[l], acceptedProblems)) {
@@ -62,9 +65,9 @@ const MagicPage = () => {
 			}
 		}
 		if (i == 1) {
-			if (date != localStorage.getItem("MagicDate") || userName != localStorage.getItem("magicUser")) {
+			if (!"MagicDate" in localStorage || date !== localStorage.getItem("MagicDate") || !"magicUser" in localStorage || userName !== localStorage.getItem("magicUser")) {
 				localStorage.setItem("magicUser", userName);
-				alert("Questions updated", userName);
+				// alert("Questions updated", userName);
 				console.log(userName, "Chhh");
 				localStorage.setItem("fine", JSON.stringify(final));
 				localStorage.setItem("MagicDate", date);
@@ -75,86 +78,37 @@ const MagicPage = () => {
 	useEffect(() => {
 		if (i < 2) {
 			doMagic();
-			console.log(i);
+			console.log("use", i);
 			setI(i + 1);
-			console.log(magicItems);
-			console.log(acceptedProblems);
-			console.log(getRated(rating).r1);
 		}
-		console.log(getRated(rating));
 		setMagicItems(JSON.parse(localStorage.getItem("fine")));
-	}, [questions]);
+	}, [i]);
 	return (
 		<div className="main">
 			<Navbar />
 			<div>
 				{"MagicDate" in localStorage && (
 					<div className="grid">
-						<table>
-							<th className="tableRow">
-								<td
-									className="t1"
-									style={{
-										color: "#c9d9ff",
-										fontSize: "24px",
-										fontWeight: "bolder",
-									}}
-								>
-									Contest
-								</td>
-								<td
-									className="t2"
-									style={{
-										color: "#c9d9ff",
-										fontSize: "24px",
-										fontWeight: "bolder",
-									}}
-								>
-									Problem
-								</td>
-								<td
-									className="t3"
-									style={{
-										color: "#c9d9ff",
-										fontSize: "24px",
-										fontWeight: "bolder",
-									}}
-								>
-									Rating
-								</td>
-
-								<td
-									className="t4"
-									style={{
-										color: "#c9d9ff",
-										fontSize: "24px",
-										fontWeight: "bolder",
-									}}
-								>
-									Solved ({acceptedProblems.length})
-								</td>
-							</th>
-							{magicItems.map((pos) => {
-								const isAccepted = acceptedProblems.some((accepted) => accepted.contestId === pos.contestId && accepted.index === pos.index);
-								return (
-									<tr className="tableRow">
-										<td className="t1">
-											<a style={{ color: "tomato" }} href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
-												{pos.contestId}
-												{pos.index}
-											</a>
-										</td>
-										<td className="t2">
-											<a style={{ color: "#c9d9ff" }} href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
-												{pos.name}
-											</a>
-										</td>
-										<td className="t3">{pos.rating}</td>
-										<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
-									</tr>
-								);
-							})}
-						</table>
+						{magicItems.map((pos) => {
+							const isAccepted = acceptedProblems.some((accepted) => accepted.contestId === pos.contestId && accepted.index === pos.index);
+							return (
+								<a href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
+									<div className="card">
+										<h4>
+											<tr className="tableRow">
+												<td className="t1">
+													{pos.contestId}
+													{pos.index}
+												</td>
+												<td className="t2">{pos.name}</td>
+												<td className="t3">{pos.rating}</td>
+												<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
+											</tr>
+										</h4>
+									</div>
+								</a>
+							);
+						})}
 					</div>
 				)}
 			</div>

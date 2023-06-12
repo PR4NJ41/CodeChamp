@@ -92,7 +92,7 @@ const AppProvider = ({ children }) => {
 		fetchProfile(m);
 		console.log(profile);
 		setUserName(localStorage.getItem("user"));
-		getContests(contestApi);
+		// getContests(contestApi);
 		getQuestions(questionApi);
 		setTimeout(() => {
 			setOnLoading(false);
@@ -142,6 +142,7 @@ const AppProvider = ({ children }) => {
 				setFilterContest,
 				onLoading,
 				setOnLoading,
+				setContests,
 			}}
 		>
 			{children}

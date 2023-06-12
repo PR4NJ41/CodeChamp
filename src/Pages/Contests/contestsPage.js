@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../Components/Context/context";
 
 const ContestsPage = () => {
 	// let API = "https://codeforces.com/api/problemset.problems";
-	const { contests, filterContest, setFilterContest, questions, acceptedQuestions } = useGlobalContext();
+	const { contests, filterContest, setFilterContest, questions, acceptedQuestions, setContests, onLoading, setOnLoading } = useGlobalContext();
 	// let API2 = "https://codeforces.com/api/contest.list";
 	// const [posts, setPosts] = useState([]);
 
@@ -16,6 +16,7 @@ const ContestsPage = () => {
 	// 		.then((response) => response.json())
 	// 		.then((data) => setPosts(data.result));
 	// };
+	const contestApi = "https://codeforces.com/api/contest.list";
 
 	const [currentpage, setCurrentpage] = useState(1);
 	const recordPerPage = 50;
@@ -29,13 +30,35 @@ const ContestsPage = () => {
 	// 	fetchApiData();
 	// }, []);
 
+	const getContests = async (url) => {
+		try {
+			const res = await fetch(url);
+			const data = await res.json();
+			setContests(data.result);
+			setFilterContest(data.result);
+			localStorage.setItem("contest", true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const sortContest = (e) => {
 		const temp = contests.filter((q) => q.name.toLowerCase().includes(e));
 		setFilterContest(temp);
 	};
+	useEffect(() => {
+		if (!(localStorage.getItem("contest") == "false")) {
+			setOnLoading(true);
+
+			getContests(contestApi).then(() => {
+				setOnLoading(false);
+			});
+		}
+	}, []);
 
 	return (
 		<div className="main">
+			{onLoading && <div className="loader" />}
 			<Navbar />
 
 			<div className="contestSort">
