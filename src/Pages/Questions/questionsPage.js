@@ -5,8 +5,56 @@ import Navbar from "../../Components/Navbar/navbar";
 import { useGlobalContext } from "../../Components/Context/context";
 import "./questionsPage.css";
 
+//lkneafkjnkfjnkjnfkjanskfnkasnjfkndskfnjskdnfksdnfksnfksjndkfjsdkn
+// import { IonContent, IonPage, IonList, IonItem, IonIcon } from "@ionic/react";
+
+// import { bookmarkOutline, bookmark } from "ionicons/icons";
+
+// const config = [
+// 	{
+// 		icon: bookmarkOutline,
+// 		styledIcon: bookmark,
+// 		type: "bookmark",
+// 	},
+// ];
+
+// const ToggleIcon = ({ icon, color, styledIcon, handleClick }: any) => {
+//   return (
+//     <IonIcon icon={color ? styledIcon : icon} onClick={handleClick}></IonIcon>
+//   );
+// };
+
+// const [bookColor, setBookColor] = useState(false);
+//   return (
+//     <IonPage>
+//       <IonContent>
+
+//         <IonList>
+//           <IonItem lines="none">
+//             {config.map((props, index) => (
+//               <ToggleIcon
+//                 style={{ padding: "10px" }}
+//                 handleClick={() => {
+//                   if(props.type === "bookmark") {
+//                     setBookColor(!bookColor);
+//                 }
+
+//                 }}
+//                 color={props.type === "like" ?likeColor : bookColor}
+//                 {...props}
+//               />
+//             ))}
+
+//           </IonItem>
+//         </IonList>
+//       </IonContent>
+//     </IonPage>
+//   );
+// };
+//lkneafkjnkfjnkjnfkjanskfnkasnjfkndskfnjskdnfksdnfksnfksjndkfjsdkn
+
 const QuestionsPage = () => {
-	const { questions, acceptedProblems, newQuestions, setNewQuestions } = useGlobalContext();
+	const { questions, acceptedProblems, newQuestions, setNewQuestions, onLoading, setOnLoading } = useGlobalContext();
 
 	const [currentpage, setCurrentpage, k] = useState(1);
 	const recordPerPage = 50;
@@ -20,9 +68,19 @@ const QuestionsPage = () => {
 		const p = questions.filter((e) => e.name.toLowerCase().includes(event.target.value.toLowerCase()) || (e.rating.toString().includes(event.target.value.toString()) && e.rating.toString().length == event.target.value.toString().length));
 		setNewQuestions(p);
 	};
+	useEffect(() => {
+		if (questions.length == 0) {
+			setOnLoading(true);
+		}
+
+		setTimeout(() => {
+			setOnLoading(false);
+		}, 500);
+	}, []);
 
 	return (
 		<div className="main">
+			{onLoading && <div className="loader" />}
 			<Navbar />
 			<div className="searchBox">
 				<input className="newSearch" placeholder="Search Question" id="questionSearch" onChange={search}></input>
@@ -82,7 +140,7 @@ const QuestionsPage = () => {
 								fontWeight: "bolder",
 							}}
 						>
-							Solved ({acceptedProblems.length})
+							Solved
 						</td>
 					</th>
 
@@ -102,19 +160,25 @@ const QuestionsPage = () => {
 									</a>
 								</td>
 								<td className="t3">{post.rating}</td>
-								<td className="t3">
-									<img src="/boo.svg"></img>
-								</td>
+
 								<td className="t4">
-									<input
-										type="checkbox"
-										name="subscribe"
-										value="newsletter"
-										defaultChecked={isAccepted}
-										onChange={() => {
-											console.log("ook");
-										}}
-									></input>
+									{isAccepted ? (
+										<div>
+											<ion-icon name="bookmark" style={{ color: "#0277bd", fontSize: "22px" }} />
+										</div>
+									) : (
+										<div class="book">
+											<ion-icon
+												class="one"
+												name="bookmark"
+												style={{ color: "#0277bd", fontSize: "22px" }}
+												onClick={() => {
+													alert("Bookmark Added");
+												}}
+											/>
+											<ion-icon class="two" name="bookmark-outline" style={{ color: "#0277bd", fontSize: "22px" }}  />
+										</div>
+									)}
 								</td>
 								<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
 							</tr>

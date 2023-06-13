@@ -1,0 +1,50 @@
+.contest-loader {
+	width: 100vw;
+	height: 100vh;
+	/* background-color: #f7f9fb; */
+	background-color: #13182c;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	/* justify-content: center; */
+	position: absolute;
+	flex-direction: column;
+	top: 118px;
+	transition: opacity 0.75s, visibility 0.75s;
+}
+
+.constest-loader-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.constest-loader::after {
+	content: "";
+	width: 75px;
+	height: 75px;
+	border: 15px solid #dddddd;
+	border-top-color: #7449f5;
+	border-radius: 50%;
+	animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
+
+.tableRows {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+.tableRows td {
+	background-color: #202640;
+	color: #202640;
+	border-radius: 12px;
+	margin: 10px 0px;
+}

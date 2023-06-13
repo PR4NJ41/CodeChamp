@@ -30,3 +30,56 @@
 	flex-direction: row;
 	padding: 0px 5px;
 }
+
+.bookmark {
+	-webkit-appearance: none;
+	appearance: none;
+	height: auto;
+	border-right: 13px solid #2d3945;
+	border-bottom: 25px solid transparent;
+	position: relative;
+	border-radius: 2px;
+	left: 0px;
+}
+.bookmark:before {
+	border-radius: 2px;
+	content: "";
+	position: absolute;
+	left: 0px;
+	height: auto;
+	border-left: 13px solid #2d3945;
+	border-bottom: 25px solid transparent;
+}
+.bookmark:checked {
+	border-right-color: #2b8ced;
+	animation: scale 0.4s;
+}
+.bookmark:checked:before {
+	border-left-color: #2b8ced;
+}
+
+@keyframes scale {
+	80% {
+		transform: scale(0.8);
+	}
+}
+
+.book {
+	width: 20px;
+	height: 20px;
+}
+.book .one {
+	display: none;
+	padding: 0px;
+	margin: 0px;
+}
+.book:hover .two {
+	display: none;
+	padding: 0px;
+	margin: 0px;
+}
+.book:hover .one {
+	display: block;
+	padding: 0px;
+	margin: 0px;
+}

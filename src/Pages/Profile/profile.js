@@ -34,41 +34,41 @@ const Profile = () => {
 					<div className="right">
 						<table>
 							{profile.firstName && (
-								<tr>
+								<div className="profileRow">
 									<td>Name</td>
 									<td>
 										{profile.firstName} {profile.lastName}
 									</td>
-								</tr>
+								</div>
 							)}
 
 							{profile.country && (
-								<tr>
+								<div className="profileRow">
 									<td>Country</td>
 									<td>{profile.country}</td>
-								</tr>
+								</div>
 							)}
 
-							<tr>
+							<div className="profileRow">
 								<td>Rating</td>
 								<td>{profile.rating}</td>
-							</tr>
-							<tr>
+							</div>
+							<div className="profileRow">
 								<td>Handle</td>
 								<td>@{profile.handle}</td>
-							</tr>
-							<tr>
+							</div>
+							<div className="profileRow">
 								<td>Rank</td>
 								<td>{profile.rank}</td>
-							</tr>
-							<tr>
+							</div>
+							<div className="profileRow">
 								<td>Maximum Rating</td>
 								<td>{profile.maxRating}</td>
-							</tr>
-							<tr>
+							</div>
+							<div className="profileRow">
 								<td>Maximum Rank</td>
 								<td>{profile.maxRank}</td>
-							</tr>
+							</div>
 						</table>
 					</div>
 				</div>

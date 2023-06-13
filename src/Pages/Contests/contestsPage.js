@@ -4,6 +4,7 @@ import "../Profile/homepage.css";
 import "../Profile/contestPage.css";
 import Navbar from "../../Components/Navbar/navbar";
 import { useGlobalContext } from "../../Components/Context/context";
+import "./contestPage.css";
 
 const ContestsPage = () => {
 	// let API = "https://codeforces.com/api/problemset.problems";
@@ -47,7 +48,8 @@ const ContestsPage = () => {
 		setFilterContest(temp);
 	};
 	useEffect(() => {
-		if (!(localStorage.getItem("contest") == "false")) {
+		if (!(localStorage.getItem("contest") == true)) {
+			console.log(!localStorage.getItem("contest"));
 			setOnLoading(true);
 
 			getContests(contestApi).then(() => {
@@ -58,7 +60,53 @@ const ContestsPage = () => {
 
 	return (
 		<div className="main">
-			{onLoading && <div className="loader" />}
+			{onLoading && (
+				<div className="contest-loader">
+					<div className="contestSort">
+						<div className="chip">All</div>
+						<div className="chip">Div 1</div>
+						<div className="chip">Div 2</div>
+						<div className="chip">Div 3</div>
+						<div className="chip">Div 4</div>
+						<div className="chip">Edu Rounds</div>
+						<div className="chip">Other</div>
+					</div>
+
+					<div className="grid">
+						<table>
+							<th className="tableRows">
+								<td
+									className="t1"
+									style={{
+										color: "#202640",
+										fontSize: "24px",
+										fontWeight: "bolder",
+										margin: "0px",
+										opacity: "0",
+									}}
+								>
+									Contests
+								</td>
+							</th>
+							<tr className="tableRows">
+								<td>Codeforces Round 878 (Div. 3)</td>
+							</tr>
+							<tr className="tableRows">
+								<td>Codeforces Round 878 (Div. 3)</td>
+							</tr>
+							<tr className="tableRows">
+								<td>Codeforces Round 878 (Div. 3)</td>
+							</tr>
+							<tr className="tableRows">
+								<td>Codeforces Round 878 (Div. 3)</td>
+							</tr>
+							<tr className="tableRows">
+								<td>Codeforces Round 878 (Div. 3)</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			)}
 			<Navbar />
 
 			<div className="contestSort">
@@ -84,6 +132,7 @@ const ContestsPage = () => {
 					Other
 				</div>
 			</div>
+
 			<div className="grid">
 				<table>
 					<th className="tableRow">

@@ -122,3 +122,13 @@
 		transform: rotate(1turn);
 	}
 }
+
+.profileRow {
+	/* background-color: #7449f5; */
+	display: flex;
+	width: 100%;
+}
+.profileRow td:first-child {
+	/* background-color: #7449f5; */
+	width: 56%;
+}

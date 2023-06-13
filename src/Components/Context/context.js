@@ -14,17 +14,8 @@ const AppProvider = ({ children }) => {
 	const [profile, setProfile] = useState([]);
 	const [filterContest, setFilterContest] = useState(contests);
 	const [onLoading, setOnLoading] = useState(true);
+	// const [contestChange, setContestChange] = useState(true);
 
-	const getContests = async (url) => {
-		try {
-			const res = await fetch(url);
-			const data = await res.json();
-			setContests(data.result);
-			setFilterContest(data.result);
-		} catch (error) {
-			console.log(error);
-		}
-	};
 	let fQ = [];
 	const [i, setI] = useState(0);
 
@@ -84,6 +75,17 @@ const AppProvider = ({ children }) => {
 			console.log("errrorryttr");
 		}
 	}
+	const getContests = async (url) => {
+		try {
+			const res = await fetch(url);
+			const data = await res.json();
+			setContests(data.result);
+			setFilterContest(data.result);
+			localStorage.setItem("contest", true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		setOnLoading(true);
@@ -92,11 +94,10 @@ const AppProvider = ({ children }) => {
 		fetchProfile(m);
 		console.log(profile);
 		setUserName(localStorage.getItem("user"));
-		// getContests(contestApi);
 		getQuestions(questionApi);
 		setTimeout(() => {
 			setOnLoading(false);
-		}, 1000);
+		}, 500);
 
 		// main();
 
@@ -104,6 +105,9 @@ const AppProvider = ({ children }) => {
 
 		// return () => clearTimeout(timer);
 	}, []);
+	// useEffect(() => {
+	// 	getContests(contestApi);
+	// }, [contestChange]);
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) {
