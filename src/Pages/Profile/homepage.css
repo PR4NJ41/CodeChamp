@@ -27,7 +27,7 @@ a {
 
 .newSearch {
 	display: flex;
-	width: 100%;
+	/* width: 100%; */
 	border: 1px solid #cccccc;
 	/* background-color: #ffffff; */
 	border-radius: 10px;
@@ -43,8 +43,10 @@ a {
 	outline: none;
 	width: 280px;
 	margin-bottom: 0;
+	margin-right: 0;
 	border-color: rgba(110, 129, 203, 0.25);
 	background-color: transparent;
+	margin-left: 15%;
 }
 
 .newSearch::placeholder {
@@ -52,6 +54,10 @@ a {
 	font-weight: 500;
 	font-size: 15px;
 	color: #b2bde5;
+	/* width: 100%; */
+}
+.search {
+	margin-left: 15%;
 }
 
 .searchBox {
@@ -59,7 +65,7 @@ a {
 	/* background-color: #18181b; */
 	/* border: 1px solid red; */
 	/* border-radius: 6px; */
-	padding-left: 30%;
+
 	padding-bottom: 5px;
 	/* color: white; */
 	/* appearance: none; */

@@ -85,9 +85,11 @@ const QuestionsPage = () => {
 			*/}
 			<Navbar />
 			<div className="searchBox">
-				<input className="newSearch" placeholder="Search Question" id="questionSearch" onChange={search}></input>
-				<div className="search">
-					<img src="search.svg"></img>
+				<div className="searchContainer">
+					<input className="newSearch" placeholder="Search Question" id="questionSearch" onChange={search}></input>
+					<div className="search">
+						<img src="search.svg"></img>
+					</div>
 				</div>
 			</div>
 
