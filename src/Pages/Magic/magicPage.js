@@ -86,29 +86,76 @@ const MagicPage = () => {
 	return (
 		<div className="main">
 			<Navbar />
-			<div>
+			<div className="magicTable">
 				{"MagicDate" in localStorage && (
 					<div className="grid">
-						{magicItems.map((pos) => {
-							const isAccepted = acceptedProblems.some((accepted) => accepted.contestId === pos.contestId && accepted.index === pos.index);
-							return (
-								<a href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
-									<div className="card">
-										<h4>
-											<tr className="tableRow">
-												<td className="t1">
-													{pos.contestId}
-													{pos.index}
-												</td>
-												<td className="t2">{pos.name}</td>
-												<td className="t3">{pos.rating}</td>
-												<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
-											</tr>
-										</h4>
-									</div>
-								</a>
-							);
-						})}
+						<table>
+							<th className="tableRow">
+								<td
+									className="t1"
+									style={{
+										color: "#b2bde5",
+										fontSize: "24px",
+										fontWeight: "bolder",
+										paddingLeft: "0px",
+									}}
+								>
+									Contest
+								</td>
+								<td
+									className="t2"
+									style={{
+										color: "#b2bde5",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
+								>
+									Problem
+								</td>
+								<td
+									className="t3"
+									style={{
+										color: "#b2bde5",
+										fontSize: "24px",
+										fontWeight: "bolder",
+										paddingRight: "40px",
+									}}
+								>
+									Rating
+								</td>
+
+								<td
+									className="t4"
+									style={{
+										color: "#b2bde5",
+										fontSize: "24px",
+										fontWeight: "bolder",
+									}}
+								>
+									Solved
+								</td>
+							</th>
+							{magicItems.map((pos) => {
+								const isAccepted = acceptedProblems.some((accepted) => accepted.contestId === pos.contestId && accepted.index === pos.index);
+								return (
+									<tr className="tableRow">
+										<td className="t1">
+											<a href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`} style={{ color: "tomato" }}>
+												{pos.contestId}
+												{pos.index}
+											</a>
+										</td>
+										<td className="t2">
+											<a style={{ color: "#c9d9ff" }} s href={`https://codeforces.com/problemset/problem/${pos.contestId}/${pos.index}`}>
+												{pos.name}
+											</a>
+										</td>
+										<td className="t3">{pos.rating}</td>
+										<td className="t4">{isAccepted ? <div className="accepted">Accepted</div> : ""}</td>
+									</tr>
+								);
+							})}
+						</table>
 					</div>
 				)}
 			</div>

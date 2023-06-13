@@ -80,7 +80,9 @@ const QuestionsPage = () => {
 
 	return (
 		<div className="main">
-			{onLoading && <div className="loader" />}
+			{/*
+			  {onLoading && <div className="loader" />} 
+			*/}
 			<Navbar />
 			<div className="searchBox">
 				<input className="newSearch" placeholder="Search Question" id="questionSearch" onChange={search}></input>
@@ -98,6 +100,7 @@ const QuestionsPage = () => {
 								color: "#b2bde5",
 								fontSize: "24px",
 								fontWeight: "bolder",
+								paddingLeft: "0px",
 							}}
 						>
 							Contest
@@ -118,12 +121,13 @@ const QuestionsPage = () => {
 								color: "#b2bde5",
 								fontSize: "24px",
 								fontWeight: "bolder",
+								paddingRight: "40px",
 							}}
 						>
 							Rating
 						</td>
 						<td
-							className="t3"
+							className="t4"
 							style={{
 								color: "#b2bde5",
 								fontSize: "24px",
@@ -176,7 +180,7 @@ const QuestionsPage = () => {
 													alert("Bookmark Added");
 												}}
 											/>
-											<ion-icon class="two" name="bookmark-outline" style={{ color: "#0277bd", fontSize: "22px" }}  />
+											<ion-icon class="two" name="bookmark-outline" style={{ color: "#0277bd", fontSize: "22px" }} />
 										</div>
 									)}
 								</td>
