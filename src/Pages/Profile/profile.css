@@ -40,7 +40,9 @@
 	width: 400px;
 	padding: 0px 90px;
 	border-radius: 12px;
-	background-color: rgba(18, 18, 39, 0.621);
+	/* background-color: rgba(18, 18, 39, 0.621); */
+	background-color: #1a213c;
+	border: 1px solid rgb(41, 50, 93);
 	/* height: 20px; */
 	margin-top: 40px;
 	display: flex;
