@@ -10,7 +10,7 @@ const HomePage = () => {
 				<Profile />
 			) : (
 				<div className="home">
-					<input placeholder="Enter ID" id="userNameInput"></input>
+					<input placeholder="Enter Your Codeforces ID (e.g. jiangly) " id="userNameInput"></input>
 					{errorMessage && <div className="loginError">Enter Valid Codeforces id</div>}
 					<button
 						onClick={() => {
